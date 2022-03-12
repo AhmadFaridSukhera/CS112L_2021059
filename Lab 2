@@ -1,0 +1,158 @@
+//task 1
+#include <iostream>
+using namespace std;
+#define power(num1,num2) int result=(num1<<num2)
+int main(){
+	int a,b;
+	
+	cout<<" The formula for this program is Num1*2^Num2"<<endl<<endl;
+	cout<<"Enter number 1: ";
+	cin>>a;
+	cout<<"Enter number 2: ";
+	cin>>b;
+	power(a,b);
+	cout<<"Your result is: "<<result;
+	
+}
+
+//task 2
+
+#include <iostream>
+using namespace std;
+
+void power(int a) {
+
+	if (a & (a - 1)) {
+		cout << "its a not a power of 2 " << endl;
+
+	}
+	else {
+		cout << "its a power of 2";
+	}
+}
+
+int main() {
+
+	int x;
+	cout << "Enter a value to see if its a power of 2: ";
+	cin >> x;
+	power(x);
+
+
+}
+
+//task 3
+
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+using namespace std;
+
+void decimalToAnyBase(int num, int base)
+{
+    if (num == 0)
+        return;
+    int temp = num % base;
+
+    num /= base;
+
+    if (temp < 0)
+        num += 1;
+
+    decimalToAnyBase(num, base);
+    cout << (temp < 0 ? temp + (base * -1) : temp);
+    return;
+}
+
+
+
+int anyBaseToDecimal(int num, int base) {
+    int ans = 0;
+    int power = 0;
+    int temp;
+
+    while (num != 0)
+    {
+        temp = num % 10;
+        num /= 10;
+        ans += temp * pow(base, power);
+
+        power++;
+    }
+    return ans;
+}
+
+int sum(int convertedNum1, int convertedNum2)
+{
+    while (convertedNum2 != 0)
+    {
+        unsigned carry = convertedNum1 & convertedNum2;
+        convertedNum1 = convertedNum1 ^ convertedNum2;
+        convertedNum2 = carry << 1;
+    }
+    return convertedNum1;
+}
+
+
+int main()
+{
+
+    int a, a2;
+    int base, ans;
+    int converted1, converted2;
+    cout << "Enter base"<<endl;
+    cin >> base;
+    cout << "Enter number 1"<<endl;
+    cin >> a;
+    cout << "Enter number 2"<<endl;
+    cin >> a2;
+    switch (base)
+    {
+    case 2:
+        converted1 = anyBaseToDecimal(a, base);
+        converted2 = anyBaseToDecimal(a2, base);
+        ans = sum(converted1, converted2);
+        if (ans != 0)
+        {
+            decimalToAnyBase(ans, base);
+            cout << endl;
+        }
+        else
+            cout << "0" << endl;
+        break;
+    
+    case 8:
+        converted1 = anyBaseToDecimal(a, base);
+        converted2 = anyBaseToDecimal(a2, base);
+        ans = sum(converted1, converted2);
+        if (ans != 0)
+        {
+            decimalToAnyBase(ans, base);
+            cout << endl;
+        }
+        else
+            cout << "0" << endl;
+        break;
+    
+    case 16:
+        converted1 = anyBaseToDecimal(a, base);
+        converted2 = anyBaseToDecimal(a2, base);
+        ans = sum(converted1, converted2);
+        
+        if (ans != 0)
+        {
+            decimalToAnyBase(ans, base);
+            cout << endl;
+        }
+        else
+            cout << "0" << endl;
+        break;
+    
+    default:
+        cout << "base is invalid"<<endl;
+        break;
+    }
+
+  
+
+}
