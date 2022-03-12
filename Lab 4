@@ -41,6 +41,8 @@ int main()
 
 
 //task 2
+
+
 #include <iostream>
 using namespace std;
 
@@ -219,5 +221,167 @@ int main()
 
 //task 3
 
+#include<iostream>
 
+using namespace std;
+
+class set {
+public:
+	const static int size = 32;
+	int arr[size] = { 0 };
+	
+	void initialize() {
+		
+		for (int i = 0; i < size; i++)
+			arr[i] = i;
+
+	}
+	void display() {
+		cout << "your set is {";
+		for (int i = 0; i < size; i++) {
+			cout << arr[i] << " ";
+		}
+		cout << "}" << endl<<endl;
+	}
+	void setNUMBER() {
+		
+		cout << " Enter a value between 0 and 31 where you want to add the number: ";
+		int x;
+		cin >> x;
+		cout << "Enter the value which you want to replace it with: ";
+		int y;
+		cin >> y;
+		arr[x] = y;
+		cout << endl;
+		cout << "The number at " << x << " has been replaced with " << y<< " the new set is: "<<endl;
+		display();
+	}
+	
+	void checkNUMBER() {
+		cout << "Enter  the number you want : ";
+		int x;
+		cin >> x;
+
+			bool y=false;
+		for (int i = 0; i < size; i++) {
+			
+			if (arr[i] == x) {
+				cout << endl << "Yes the number exists at " << x << " position" << endl;
+				y = true;
+			}
+				
+		}
+		if (y == false) {
+			cout << "The number doesn't exist" << endl;
+			cout << "Try again!!!!!" << endl;
+			checkNUMBER();
+		}
+	
+	}
+	void Delete() {
+		
+		cout << "Enter the position between 0 and 31 at which you want to delete : ";
+		int x;
+		cin >> x;
+		int i = x;
+		for(;i<size-1; i++) {
+			arr[i] = arr[i + 1];
+			
+		}
+		if (x != 31 && i == 31)
+			arr[31] = 0;
+		cout << endl << "The number at position " << x << " has been deleted"<<endl;
+	
+	}
+	void CheckSet() {
+		int count = 0;
+		
+		for (int i = 0; i < size; i++) {
+			for (int j = i+1; j < size; j++) {
+				if (arr[i] == arr[j])
+					count++;
+			}
+		}
+	
+		if (count > 1) {
+			cout << "This is not a set" << endl;
+		}
+			else {
+				cout << "This is a set"<<endl;
+			}
+			
+
+
+	}
+
+};
+
+void menu() {
+
+	cout << "----- Welcome to main menu please choose an option to begin -----\n\n";
+	cout << "1. Enter values in the set" << endl;
+	cout << "2. Enter a value at a certain position in the set" << endl;
+	cout << "3. Check if a certain value is in the set" << endl;
+	cout << "4. Delete a certain value from set" << endl;
+	cout << "5. Display set" << endl;
+	cout << "6. Check if its a set" << endl<<endl;
+	cout << " Choose an option : ";
+	set y;
+
+	char x;
+	cin >> x;
+	cout << endl;
+	switch (x) {
+
+	case '1':
+		y.initialize();
+		menu();
+		break;
+
+	case '2':
+
+		y.initialize();
+		y.setNUMBER();
+
+		menu();
+		break;
+
+	case '3':
+
+
+		y.initialize();
+		y.checkNUMBER();
+
+		menu();
+		break;
+
+	case '4':
+		y.initialize();
+		y.Delete();
+		y.display();
+		menu();
+		break;
+
+	case '5':
+
+		y.initialize();
+		y.display();
+
+		menu();
+		break;
+
+
+	case '6':
+		y.initialize();
+		y.CheckSet();
+		menu();
+		break;
+	}
+	}
+
+
+int main() {
+
+	menu();
+}
 
