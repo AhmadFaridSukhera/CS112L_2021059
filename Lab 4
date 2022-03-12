@@ -1,0 +1,219 @@
+//task 1
+
+#include <iostream>
+using namespace std;
+
+void swap(int x, int y){
+	x=x+y;
+	y=x-y;
+	x=x-y;
+	
+cout<<"After swapping A= "<<x<<" B="<<y;	
+}
+
+
+void display(int x, int y){
+cout<<"Before swapping A= "<<x<<" B="<<y<<endl;
+swap(x,y);
+	
+	
+}
+
+void setter()
+{
+	int x, y;
+	cout<<"Enter two numbers: ";
+	cin>>x>>y;
+
+ display(x,y);	
+
+}
+
+
+
+int main()
+{
+	
+	setter();
+	
+	
+}
+
+
+//task 2
+#include <iostream>
+using namespace std;
+
+class Array {
+public:
+	
+	const static int size = 5;
+	int arr[size][size] = { 0 };
+	int arr1[size][size] = { 0 };
+	int temp[size][size] = { 0 };
+	
+	void initialize() {
+		cout << "Enter the array: ";
+	
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				cin >> arr [i][j];
+			}
+	}
+		
+	}
+	
+	void display() {
+		cout << "your array is: \n";
+
+
+		for (int i = 0; i < size; i++) {
+			
+			for (int j = 0; j < size; j++) {
+				cout << arr[i][j]<<" ";
+				
+				if (j == size-1)
+				cout <<endl;
+			}
+		}
+		
+	}
+
+	void transpose() {
+
+
+		for (int i = 0; i < size; i++) {
+
+			for (int j = 0; j < size; j++) {
+				temp[j][i] = arr[i][j];
+				arr1[i][j] = arr[i][j];
+
+			}
+		}
+		for (int i = 0; i < size; i++) {
+
+			for (int j = 0; j < size; j++) {
+				arr[i][j] = temp[i][j];
+
+			}
+		}
+		cout << "your transpose array is: \n";
+
+
+		for (int i = 0; i < size; i++) {
+
+			for (int j = 0; j < size; j++) {
+				cout << arr[i][j] << " ";
+
+				if (j == size - 1)
+					cout << endl;
+			}
+		}
+	
+	
+	}
+	
+	void isSymmetry() {
+		int count=0;
+		
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				
+				if (arr1[i][j] == temp[i][j]) {
+					count++;
+				}
+
+			}
+					}
+
+		if (count == (size * size)) {
+			cout << "The matrix is symmetric" << endl << endl;
+		}
+		else {
+			cout << "The matrix is NOT symmetric" << endl << endl;
+		}
+
+
+	}
+	void multiply() {
+		Array y, s;
+		y.initialize();
+		y.display();
+		s.initialize();
+		s.display();
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++)
+			for(int k=0;k<size;k++)
+			{
+				y.temp[i][j]=y.temp[i][j]+ y.arr[i][k] * s.arr[k][j];
+
+			}
+		}
+		cout << "your reslutant array is: \n";
+
+
+		for (int i = 0; i < size; i++) {
+
+			for (int j = 0; j < size; j++) {
+				cout << y.temp[i][j] << " ";
+
+				if (j == size - 1)
+					cout << endl;
+			}
+		}
+
+
+
+	}
+
+
+};
+
+void menu() {
+	cout << "----- Welcome to main menu please choose an option to begin -----\n\n";
+	cout << " 1. Initialize and Display an array\n";
+	cout << " 2. Take a Transpose and display array\n";
+	cout << " 3. Check for symmetry\n";
+	cout << " 4. Multiply with an array and Diplay results \n";
+	cout << " Choose your option: ";
+	Array y,s;
+	char x;
+	cin >> x;
+	switch (x) {
+	
+	case '1': 
+		y.initialize();
+		y.display();
+		menu();
+					break;
+	
+	case '2':
+		y.initialize();
+		y.display();
+		y.transpose();
+		menu();
+		break;
+	
+	case '3':
+		y.initialize();
+		y.display();
+		y.transpose();
+		y.isSymmetry();
+		menu();
+		break;
+	
+	case '4':
+		
+		y.multiply();
+
+
+		menu();
+		break;
+	}
+}
+
+int main() 
+{
+	menu();
+}
+
